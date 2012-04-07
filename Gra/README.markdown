@@ -8,6 +8,6 @@ Wystarczy wybrać TAK i ponownie można grać ;)<br>
 Jego kod jest bardzo prosty miłej zabawy z jego edycją.
 
 
-pzdr .:M1L05Z:.
+pzdr .:<b>M1L05Z</b>:.
 
 
