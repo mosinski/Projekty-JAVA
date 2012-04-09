@@ -3,24 +3,6 @@ import java.awt.*;
 import java.awt.event.*;
 import java.text.*;
 import java.util.Random;
-
-import java.io.*;
-import java.io.File;
-import java.io.RandomAccessFile;
-import java.io.FileInputStream;
-import java.awt.*;
-import java.awt.event.*;
-import java.awt.FlowLayout;
-import java.text.*;
-import javax.swing.*;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JOptionPane;
-import javax.swing.JRadioButton;
-import javax.swing.JFileChooser;
-import javax.swing.filechooser.FileFilter;
-import javax.swing.filechooser.FileNameExtensionFilter;
-
 import java.awt.Container;
 import javax.swing.BorderFactory;
 import javax.swing.JFrame;
@@ -217,24 +199,7 @@ public class Gra extends JFrame
 	
 		if(w>najlepszy){najlepszy=w;}
         textField1.setText(""+w);
-        textField2.setText(""+najlepszy);
-       /** 
-		if(najlepszy>21){
-				JWindow gratulacje = new JWindow();
-				gratulacje.setBounds(200, 200, 200, 200);
-				gratulacje.setVisible(true);
-				JLabel grat = new JLabel("Gratulacje");
-				gratulacje.getContentPane().add(grat);
-				try {
-					
-					Thread.sleep(1260);
-					} catch (InterruptedException e) {
-					e.printStackTrace();
-					}
-					gratulacje.setVisible(false);
-					gratulacje.dispose();
-				}**/
-				
+        textField2.setText(""+najlepszy);		
         }
         else {Object[] options = {" TAK "," NIE "};
 		int n = JOptionPane.showOptionDialog(null,"Czy chcesz zagrać jeszcze raz ?",
