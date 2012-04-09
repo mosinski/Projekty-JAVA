@@ -9,7 +9,7 @@ static int x,komp,czlowiek,wynik_komp=0,wynik_czlowiek=0,licznik = 0,ponownie;
 public static void main(String args[]) throws IOException
 {
 System.out.println("|-------------------------------------|");
-System.out.println ("|.:Witaj w Grze Papier Nożyce Kamień:.|");
+System.out.println("|.:Witaj w Grze Papier Nożyce Kamień:.|");
 System.out.println("|-------------------------------------|\n");
 while(licznik<1){
 System.out.println(">>Do ilu wygranych chcesz grać?");
