@@ -11,9 +11,7 @@ import javax.swing.border.Border;
 
 public class PapierNozyceKamien_okienko extends JFrame
 { Button przy1,przy2,przy3,przy4;
-static int x,komp,czlowiek,wynik_komp=0,wynik_czlowiek=0,licznik = 0,ponownie;
-  JTextField textField1 = new JTextField(2);
-  JTextField textField2 = new JTextField(2);
+  static int x=0,komp,czlowiek,wynik_komp=0,wynik_czlowiek=0,licznik = 0,ponownie;
  
   public PapierNozyceKamien_okienko() {
     super("Gra Papier Nożyce Kamień");
@@ -23,14 +21,16 @@ static int x,komp,czlowiek,wynik_komp=0,wynik_czlowiek=0,licznik = 0,ponownie;
 	c.setLayout(new BorderLayout(1,1));
 	
 	final ImageIcon papier = new ImageIcon("obrazki/papier.png"); 
-	final ImageIcon nozyce = new ImageIcon("obrazki/nozyce.png");
+	final ImageIcon nozyce = new ImageIcon("obrazki/nozyczki.png");
     final ImageIcon kamien = new ImageIcon("obrazki/kamien.png");
 	final ImageIcon user = new ImageIcon("obrazki/User.png");
 	final ImageIcon comp = new ImageIcon("obrazki/computer.png");
-	
-	String wielkosc = JOptionPane.showInputDialog(null,"Do ilu wygranych chcesz grać?");
-	x = Integer.parseInt(wielkosc);
-	final JLabel arg1 = new JLabel("                                                                                          Grasz do "+x+" wygranych");
+	final String iduser = JOptionPane.showInputDialog(null,"Podaj nazwę gracza");
+	final String a = JOptionPane.showInputDialog(null,"Do ilu wygranych chcesz grać?");
+	x = Integer.parseInt(a);
+    final String uzytkownik = "<html>&nbsp;&nbsp;Nick Gracza: ";
+    final String ile = "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Grasz do ";
+	final JLabel arg1 = new JLabel(uzytkownik+iduser+ile+x+" wygranych");
 	c.add(arg1, BorderLayout.NORTH);
 	final JLabel arg2 = new JLabel(user);
 	c.add(arg2,BorderLayout.WEST);
@@ -49,19 +49,100 @@ static int x,komp,czlowiek,wynik_komp=0,wynik_czlowiek=0,licznik = 0,ponownie;
 		ActionListener losujActionListener = new ActionListener() {
 		public void actionPerformed(ActionEvent actionEvent) {
         AbstractButton przy1 = (AbstractButton) actionEvent.getSource();
+        while(wynik_czlowiek<x&&wynik_komp<x){
 		Object[] options = {" PAPIER "," NOŻYCE "," KAMIEŃ "};
-		int komputer;
+		int komputer=0;
 		int pytanie = JOptionPane.showOptionDialog(null,"Wybierz z dostępnych opcji:",
-		"Wybór",JOptionPane.YES_NO_CANCEL_OPTION,JOptionPane.QUESTION_MESSAGE,null,options,options[0]);
+		"Wybór",JOptionPane.YES_NO_CANCEL_OPTION,JOptionPane.QUESTION_MESSAGE,null,options,null);
 		Random losuj = new Random();
 	    komputer = losuj.nextInt(3)+1;
 		if(pytanie==0&&komputer==3){
-			System.out.println("Komputer wybrał Kamień. Wygrałeś!!");
+			String zwyciestwo1="<html>&nbsp;&nbsp;||=====================||<br>";
+			String zwyciestwo2="&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.:: ZWYCIĘSTWO ::.<br>";
+			String zwyciestwo3="&nbsp;&nbsp;||=====================||<br>";
 			wynik_czlowiek++;
 			arg2.setIcon(papier);
 			arg3.setIcon(kamien);
-			arg4.setText(napis+napis1+wynik_czlowiek+napis2+wynik_komp+napis3);
+			arg4.setText(zwyciestwo1+zwyciestwo2+zwyciestwo3+napis+napis1+wynik_czlowiek+napis2+wynik_komp+napis3);}
+		else if (pytanie==0&&komputer==2){
+			String zwyciestwo1="<html>&nbsp;&nbsp;||=====================||<br>";
+			String zwyciestwo2="&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.:: PRZEGRANA ::.<br>";
+			String zwyciestwo3="&nbsp;&nbsp;||=====================||<br>";
+			wynik_komp++;
+			arg2.setIcon(papier);
+			arg3.setIcon(nozyce);
+			arg4.setText(zwyciestwo1+zwyciestwo2+zwyciestwo3+napis+napis1+wynik_czlowiek+napis2+wynik_komp+napis3);}
+		else if (pytanie==0&&komputer==1){
+			String zwyciestwo1="<html>&nbsp;&nbsp;||=====================||<br>";
+			String zwyciestwo2="&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.:: REMIS ::.<br>";
+			String zwyciestwo3="&nbsp;&nbsp;||=====================||<br>";
+			arg2.setIcon(papier);
+			arg3.setIcon(papier);
+			arg4.setText(zwyciestwo1+zwyciestwo2+zwyciestwo3+napis+napis1+wynik_czlowiek+napis2+wynik_komp+napis3);}
+		else if (pytanie==1&&komputer==1){
+			String zwyciestwo1="<html>&nbsp;&nbsp;||=====================||<br>";
+			String zwyciestwo2="&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.:: ZWYCIĘSTWO ::.<br>";
+			String zwyciestwo3="&nbsp;&nbsp;||=====================||<br>";
+			wynik_czlowiek++;
+			arg2.setIcon(nozyce);
+			arg3.setIcon(papier);
+			arg4.setText(zwyciestwo1+zwyciestwo2+zwyciestwo3+napis+napis1+wynik_czlowiek+napis2+wynik_komp+napis3);}
+		else if (pytanie==1&&komputer==2){
+			String zwyciestwo1="<html>&nbsp;&nbsp;||=====================||<br>";
+			String zwyciestwo2="&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.:: REMIS ::.<br>";
+			String zwyciestwo3="&nbsp;&nbsp;||=====================||<br>";
+			arg2.setIcon(nozyce);
+			arg3.setIcon(nozyce);
+			arg4.setText(zwyciestwo1+zwyciestwo2+zwyciestwo3+napis+napis1+wynik_czlowiek+napis2+wynik_komp+napis3);}
+		else if (pytanie==1&&komputer==3){
+			String zwyciestwo1="<html>&nbsp;&nbsp;||=====================||<br>";
+			String zwyciestwo2="&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.:: PRZEGRANA ::.<br>";
+			String zwyciestwo3="&nbsp;&nbsp;||=====================||<br>";
+			wynik_komp++;
+			arg2.setIcon(nozyce);
+			arg3.setIcon(kamien);
+			arg4.setText(zwyciestwo1+zwyciestwo2+zwyciestwo3+napis+napis1+wynik_czlowiek+napis2+wynik_komp+napis3);}
+		else if (pytanie==2&&komputer==1){
+			String zwyciestwo1="<html>&nbsp;&nbsp;||=====================||<br>";
+			String zwyciestwo2="&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.:: PRZEGRANA ::.<br>";
+			String zwyciestwo3="&nbsp;&nbsp;||=====================||<br>";
+			wynik_komp++;
+			arg2.setIcon(kamien);
+			arg3.setIcon(papier);
+			arg4.setText(zwyciestwo1+zwyciestwo2+zwyciestwo3+napis+napis1+wynik_czlowiek+napis2+wynik_komp+napis3);}
+		else if (pytanie==2&&komputer==2){
+			String zwyciestwo1="<html>&nbsp;&nbsp;||=====================||<br>";
+			String zwyciestwo2="&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.:: ZWYCIĘSTWO ::.<br>";
+			String zwyciestwo3="&nbsp;&nbsp;||=====================||<br>";
+			wynik_czlowiek++;
+			arg2.setIcon(kamien);
+			arg3.setIcon(nozyce);
+			arg4.setText(zwyciestwo1+zwyciestwo2+zwyciestwo3+napis+napis1+wynik_czlowiek+napis2+wynik_komp+napis3);}
+		else if (pytanie==2&&komputer==3){
+			String zwyciestwo1="<html>&nbsp;&nbsp;||=====================||<br>";
+			String zwyciestwo2="&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.:: REMIS ::.<br>";
+			String zwyciestwo3="&nbsp;&nbsp;||=====================||<br>";
+			arg2.setIcon(kamien);
+			arg3.setIcon(kamien);
+			arg4.setText(zwyciestwo1+zwyciestwo2+zwyciestwo3+napis+napis1+wynik_czlowiek+napis2+wynik_komp+napis3);}
 			}
+			Object[] options = {" TAK "," NIE "};
+			int  ponownie= JOptionPane.showOptionDialog(null,"Czy chcesz zagrać jeszcze raz ?",
+			"Zagrać Ponownie",JOptionPane.YES_NO_CANCEL_OPTION,JOptionPane.QUESTION_MESSAGE,null,options,null);
+			if (ponownie==0){
+			String b = JOptionPane.showInputDialog(null,"Do ilu wygranych chcesz teraz zagrać?");
+			x = Integer.parseInt(b);
+			String uzytkownik = "<html>&nbsp;&nbsp;Nick Gracza: ";
+			String ile = "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Grasz do ";
+			arg1.setText(uzytkownik+iduser+ile+x+" wygranych");
+			String napis = "<html>&nbsp;&nbsp;||=====================||<br>";
+			String napis1 = "&nbsp;&nbsp;||:Aktualny Status Wygranych:&nbsp;|| <br>&nbsp;&nbsp;||&nbsp;&nbsp;Gracz:";
+			String napis2 = "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Komputer:";
+			String napis3 = "&nbsp;&nbsp;||<br>&nbsp;&nbsp;||=====================||";
+			wynik_czlowiek=0;
+			wynik_komp=0;
+			arg4.setText(napis+napis1+wynik_czlowiek+napis2+wynik_komp+napis3);}
+			else{System.exit(0);}
 		}};
         przy1.addActionListener(losujActionListener);   
 }
