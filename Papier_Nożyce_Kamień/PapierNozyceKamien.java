@@ -86,5 +86,4 @@ if(ponownie==1){
 else if(ponownie==2){
 	System.out.println("Zapraszam Ponownie!");
 	licznik=1;}
-}
-}}
+}}}
