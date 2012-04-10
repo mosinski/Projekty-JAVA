@@ -25,6 +25,7 @@ public class Gra extends JFrame
     setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);   
     setSize(830, 450);
     setVisible(true);
+    setResizable(false);
     Font Monospaced = new Font("monospaced",Font.BOLD, 30);		
     Font odstep = new Font("Sansserif",Font.BOLD, 30);
     Font bonusowa = new Font("TimesRoman",Font.BOLD, 25);
@@ -37,7 +38,12 @@ public class Gra extends JFrame
 	final ImageIcon trzy = new ImageIcon("kostka/3.jpg");
 	final ImageIcon cztery = new ImageIcon("kostka/4.jpg");
 	final ImageIcon piec = new ImageIcon("kostka/5.jpg");
-	final ImageIcon szesc = new ImageIcon("kostka/6.jpg");	
+	final ImageIcon szesc = new ImageIcon("kostka/6.jpg");
+	final ImageIcon czysc = new ImageIcon("ikony/clear.png");
+	final ImageIcon edycja = new ImageIcon("ikony/edycja.png");
+	final ImageIcon user = new ImageIcon("ikony/user.png");	
+	final ImageIcon user_male = new ImageIcon("ikony/user-male.png");
+	final ImageIcon user_female = new ImageIcon("ikony/user-female.png");
 	JLabel arg1 = new JLabel(" Wartość rzutu:  ");
     arg1.setFont(odstep);
 	getContentPane().add(arg1);
@@ -46,7 +52,7 @@ public class Gra extends JFrame
 	textField1.setFont(Monospaced);
 	textField1.setForeground(Color.blue);
 	textField1.setEditable(false);
-	JLabel arg2 = new JLabel("  Najlepszy wynik:  ");
+	JLabel arg2 = new JLabel("  Najlepszy rzut:");
 	arg2.setFont(odstep);
 	getContentPane().add(arg2);
 	getContentPane().add(textField2);
@@ -54,6 +60,36 @@ public class Gra extends JFrame
 	textField2.setFont(Monospaced);
 	textField2.setForeground(Color.blue);
 	textField2.setText("0");
+	JButton kasuj = new JButton(czysc);
+	kasuj.setPreferredSize(new Dimension(32, 32));
+	kasuj.setOpaque(false);
+	kasuj.setContentAreaFilled(false);
+	kasuj.setBorderPainted(false);
+	getContentPane().add(kasuj);
+	 JLabel arg3 = new JLabel("Łącznie punktów:");
+    arg3.setFont(odstep);
+    getContentPane().add(arg3);
+	getContentPane().add(textField3);
+	textField3.setText("0");
+	textField3.setFont(Monospaced);
+	textField3.setForeground(Color.blue);
+	textField3.setEditable(false);
+	JLabel space2 = new JLabel("     Ilość rzutów:");
+    space2.setFont(odstep);
+    getContentPane().add(space2);
+    getContentPane().add(textField4);
+    textField4.setText("3");
+    textField4.setFont(Monospaced);
+    textField4.setForeground(Color.blue);
+    textField4.setEditable(false);
+    
+    JButton zmien = new JButton(edycja);
+    zmien.setPreferredSize(new Dimension(34, 39));
+	zmien.setOpaque(false);
+	zmien.setContentAreaFilled(false);
+	zmien.setBorderPainted(false);
+	getContentPane().add(zmien);
+	
 	zaznacz1 = new Checkbox("1.                              ");
 	getContentPane().add(zaznacz1);
 	zaznacz2 = new Checkbox("2.                              ");
@@ -79,7 +115,15 @@ public class Gra extends JFrame
     final JToggleButton przy5 = new JToggleButton();
     przy5.setBackground(Color.white);
     getContentPane().add(przy5);
-    JLabel space = new JLabel("          ");
+    final JButton gracz = new JButton(user);
+    gracz.setPreferredSize(new Dimension(56, 56));
+	gracz.setOpaque(false);
+	gracz.setContentAreaFilled(false);
+	gracz.setBorderPainted(false);
+	getContentPane().add(gracz);
+	final JLabel iduser = new JLabel("NoName");
+	getContentPane().add(iduser);
+    JLabel space = new JLabel("     ");
     space.setFont(Monospaced);
     getContentPane().add(space);
     final JButton przy6 = new JButton("  |LOSUJ|  ");
@@ -90,64 +134,25 @@ public class Gra extends JFrame
     JLabel space1 = new JLabel("          ");
     space1.setFont(Monospaced);
     getContentPane().add(space1);
-    JLabel arg3 = new JLabel("Bonusowe punkty:");
-    arg3.setFont(odstep);
-    getContentPane().add(arg3);
-	getContentPane().add(textField3);
-	textField3.setText("0");
-	textField3.setFont(Monospaced);
-	textField3.setForeground(Color.blue);
-	textField3.setEditable(false);
-	JLabel space2 = new JLabel("     Ilość rzutów");
-    space2.setFont(odstep);
-    getContentPane().add(space2);
-    getContentPane().add(textField4);
-    textField4.setText("3");
-    textField4.setFont(Monospaced);
-    textField4.setForeground(Color.blue);
-    textField4.setEditable(false);
-	bonus = new CheckboxGroup();
-	bonus1 = new Checkbox(" 1 Para", bonus, true);
-	bonus2 = new Checkbox(" 2 Pary", bonus, false);
-	bonus3 = new Checkbox(" Trójka", bonus, false);
-	bonus4 = new Checkbox(" Kareta", bonus, false);
-	bonus5 = new Checkbox(" Full", bonus, false);
-	
-	bonus1.setFont(bonusowa);
-	bonus2.setFont(bonusowa);
-	bonus3.setFont(bonusowa);
-	bonus4.setFont(bonusowa);
-	bonus5.setFont(bonusowa);
-	
-	getContentPane().add(bonus1);
-	getContentPane().add(bonus2);
-	getContentPane().add(bonus3);
-	getContentPane().add(bonus4);
-	getContentPane().add(bonus5);
-    
+
 	przy1.setIcon(zero);
 	przy2.setIcon(zero);
 	przy3.setIcon(zero);
 	przy4.setIcon(zero);
 	przy5.setIcon(zero);
-	
-	final JButton podlicz = new JButton(" |PODLICZ| ");
-    podlicz.setBackground(Color.black);
-    podlicz.setForeground(Color.red);
-    podlicz.setFont(Monospaced);
-    getContentPane().add(podlicz);
-	
+
 		ActionListener losujActionListener = new ActionListener() {
 		public void actionPerformed(ActionEvent actionEvent) {
         AbstractButton przy6 = (AbstractButton) actionEvent.getSource();
-        int c1=0,c2=0,c3=0,c4=0,c5=0,w,najlepszy,ilosc;
-        String teraz,ile;
+        int c1=0,c2=0,c3=0,c4=0,c5=0,w,najlepszy,ilosc,lacznie_int;
+        String teraz,ile,lacznie;
         Random a = new Random();
         teraz=textField2.getText();
         ile=textField4.getText();
+        lacznie=textField3.getText();
+        lacznie_int = Integer.parseInt(lacznie);
         najlepszy = Integer.parseInt(teraz);
         ilosc = Integer.parseInt(ile);
-        
         if(ilosc > 0){
         if(zaznacz1.getState())
 		{c1 = a.nextInt(6)+1;} 
@@ -199,19 +204,44 @@ public class Gra extends JFrame
 	
 		if(w>najlepszy){najlepszy=w;}
         textField1.setText(""+w);
-        textField2.setText(""+najlepszy);		
+        textField2.setText(""+najlepszy);
+        textField3.setText(""+(w+lacznie_int));		
         }
         else {Object[] options = {" TAK "," NIE "};
 		int n = JOptionPane.showOptionDialog(null,"Czy chcesz zagrać jeszcze raz ?",
 		"Koniec rzutów!",JOptionPane.YES_NO_CANCEL_OPTION,JOptionPane.QUESTION_MESSAGE,null,options,options[0]);
-		if(n==0){textField4.setText("3");}
+		if(n==0){
+			textField1.setText("0");
+			textField3.setText("0");
+			textField4.setText("3");
+			przy1.setIcon(zero);
+			przy2.setIcon(zero);
+			przy3.setIcon(zero);
+			przy4.setIcon(zero);
+			przy5.setIcon(zero);}
 		else if(n==1){System.exit(0);}}
 		}};
-        ActionListener podliczActionListener = new ActionListener() {
+        ActionListener kasujActionListener = new ActionListener() {
 		public void actionPerformed(ActionEvent actionEvent) {
+		textField2.setText("0");	
+		}};
+		ActionListener zmienActionListener = new ActionListener() {
+		public void actionPerformed(ActionEvent actionEvent) {
+		final String aa = JOptionPane.showInputDialog(null,"Do ilu wygranych chcesz grać?");
+		textField4.setText(aa);
+		}};
+		ActionListener graczActionListener = new ActionListener() {
+		public void actionPerformed(ActionEvent actionEvent) {
+		final String aa = JOptionPane.showInputDialog(null,"Podaj imię gracza");
+		iduser.setText(aa);
+		if(aa.endsWith("a")){
+		gracz.setIcon(user_female);}
+		else{gracz.setIcon(user_male);}
 		}};
         przy6.addActionListener(losujActionListener); 
-        podlicz.addActionListener(podliczActionListener);      
+        kasuj.addActionListener(kasujActionListener);  
+        zmien.addActionListener(zmienActionListener); 
+        gracz.addActionListener(graczActionListener);   
 }
   public static void main(String argv[]) {
 	JWindow jwin = new JWindow();
