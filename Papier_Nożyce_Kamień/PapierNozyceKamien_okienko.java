@@ -126,9 +126,12 @@ public class PapierNozyceKamien_okienko extends JFrame
 			arg3.setIcon(kamien);
 			arg4.setText(zwyciestwo1+zwyciestwo2+zwyciestwo3+napis+napis1+wynik_czlowiek+napis2+wynik_komp+napis3);}
 			}
+			String zwyciezca;
+			if (wynik_czlowiek>wynik_komp){zwyciezca="!! (: Wygrałeś :) !!";}
+			else {zwyciezca="!! ): Przegrałeś :( !!";}
 			Object[] options = {" TAK "," NIE "};
 			int  ponownie= JOptionPane.showOptionDialog(null,"Czy chcesz zagrać jeszcze raz ?",
-			"Zagrać Ponownie",JOptionPane.YES_NO_CANCEL_OPTION,JOptionPane.QUESTION_MESSAGE,null,options,null);
+			zwyciezca,JOptionPane.YES_NO_CANCEL_OPTION,JOptionPane.QUESTION_MESSAGE,null,options,null);
 			if (ponownie==0){
 			String b = JOptionPane.showInputDialog(null,"Do ilu wygranych chcesz teraz zagrać?");
 			x = Integer.parseInt(b);
