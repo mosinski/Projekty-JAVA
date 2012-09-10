@@ -1,0 +1,5 @@
+.: Ustawienia Programu :.
+Kolorystyka:
+2
+Tryb Edycji:
+0
