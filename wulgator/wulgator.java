@@ -238,7 +238,6 @@ public class wulgator extends JFrame
       e.printStackTrace();
     }
   System.exit(0);
-  
 }
   }
 }
