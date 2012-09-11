@@ -9,5 +9,5 @@ Program zapamiętuje ustawienia*
 
 Wygląd Programu:
 
-![Example usage](http://i.imgur.com/uGPSm.png)
+![Example usage](http://imgur.com/WELTq)
 
