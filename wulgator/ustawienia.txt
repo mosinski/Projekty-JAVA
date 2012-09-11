@@ -1,5 +1,5 @@
 .: Ustawienia Programu :.
 Kolorystyka:
-2
+-3355444
 Tryb Edycji:
-0
+1

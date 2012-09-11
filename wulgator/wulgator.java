@@ -104,12 +104,11 @@ public class wulgator extends JFrame
                             System.exit(2);
                                 }
     String licencja=new String(text);
-    String colorystyka=new String(kolor_prog);	
 	ta.setText(licencja);
-
-	t = Integer.parseInt(kolor_prog);
+    Color t = new Color(Integer.parseInt(kolor_prog));
 	e = Integer.parseInt(tryb_ed);
-	
+	getContentPane().setBackground(t);
+	/**
 	if (t==1){getContentPane().setBackground(Color.white);}
 	else if (t==2){getContentPane().setBackground(Color.lightGray);}
 	else if (t==3){getContentPane().setBackground(Color.gray);}
@@ -123,7 +122,7 @@ public class wulgator extends JFrame
 	else if (t==11){getContentPane().setBackground(Color.magenta);}
 	else if (t==12){getContentPane().setBackground(Color.cyan);}
 	else if (t==13){getContentPane().setBackground(Color.blue);}
-	
+	**/
 	if (e==0){ta.setEditable(false);}
 	else if (e==1){
 	     ta.setEditable(true);
@@ -218,26 +217,24 @@ public class wulgator extends JFrame
   }
     else if (s.equals("kolorystyka")){
 	Color c = JColorChooser.showDialog(wulgator.this,
-            "Choose a color...", getBackground());
-        if (c != null)
+            "Wybierz kolorystyke...", getBackground());
+        if (c != null){
           getContentPane().setBackground(Color.white);
           String colorS = Integer.toString(c.getRGB());
-          System.out.println(colorS);
+          kolor_prog=new String(colorS);
           Color d = new Color(Integer.parseInt(colorS));
           getContentPane().setBackground(d);
-          System.out.println(d);
+	  }
 	}
   else if (s.equals("Wyjście")){
   txt=".: Ustawienia Programu :.\nKolorystyka:\n"+kolor_prog+"\nTryb Edycji:\n"+tryb_ed;
   FileWriter writer;
     try {
       writer = new FileWriter("ustawienia.txt");
-      //char c = txt;
       System.out.println(txt);
       writer.write(txt);
       writer.close();
     } catch (IOException e) {
-      // TODO Auto-generated catch block
       e.printStackTrace();
     }
   System.exit(0);
