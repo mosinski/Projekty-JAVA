@@ -11,16 +11,20 @@ import javax.swing.*;
 import java.io.IOException;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JDialog;
+import javax.swing.JProgressBar;
 import javax.swing.JOptionPane;
-import javax.swing.JRadioButton;
 import javax.swing.JFileChooser;
 import javax.swing.filechooser.FileFilter;
 import javax.swing.filechooser.FileNameExtensionFilter;
+import javax.swing.JColorChooser.*;
+
 
 public class wulgator extends JFrame 
 { 
-  JTextArea ta = new JTextArea(35, 50);
+  JTextArea ta = new JTextArea(30, 50);
   JTextField textField1 = new JTextField(10);
+  JProgressBar progress = new JProgressBar(0,100);
   JCheckBoxMenuItem checkAction1 = new JCheckBoxMenuItem("Tryb Edycji");
   static String txt,tekst,kolor_prog="",tryb_ed="";
   static int t,e;
@@ -95,12 +99,14 @@ public class wulgator extends JFrame
             li.close();
             ust.close();
              }
-                                 catch (IOException e1) {
-                                        System.out.println("Brak Pliku licencja.txt!");
-                                        System.exit(2);
+                     catch (IOException e1) {
+                            System.out.println("Brak Pliku licencja.txt!");
+                            System.exit(2);
                                 }
-    String licencja=new String(text);	
+    String licencja=new String(text);
+    String colorystyka=new String(kolor_prog);	
 	ta.setText(licencja);
+
 	t = Integer.parseInt(kolor_prog);
 	e = Integer.parseInt(tryb_ed);
 	
@@ -137,7 +143,6 @@ public class wulgator extends JFrame
   if (s.equals("Wczytaj")){
 	 String tekst="";
 	 String wulgaryzm="";
-	 String sciezka="";
 	 int licznik_wulgaryzmow=0;
 	JFileChooser fileopen = new JFileChooser();
 	FileFilter filter = new FileNameExtensionFilter("pliki tekstowe", "txt");
@@ -146,58 +151,57 @@ public class wulgator extends JFrame
 	if (ret == JFileChooser.APPROVE_OPTION) {
 		File file = fileopen.getSelectedFile();
 		String nazw = new String(file.getName());
-		String zbior_wulg="wulgaryzmy.txt";
 		textField1.setText(nazw);
+		
 		if(!nazw.endsWith(".txt2"))
 		{
-			RandomAccessFile raf = null;
-			RandomAccessFile tek = null;
-			try {raf = new RandomAccessFile(zbior_wulg, "rw");} 
-				catch (FileNotFoundException e) {
-					System.out.println("BŁĄD PRZY OTWIERANIU PLIKU!");
-					System.exit(1);
-				}
-			try {tek = new RandomAccessFile(file, "rw");} 
-				 catch (FileNotFoundException e) {
-					System.out.println("BŁĄD PRZY OTWIERANIU PLIKU!");
-					System.exit(1);
-				 }
-		    long poz=0, dlug_pliku=0;
-		    try {
-				dlug_pliku = tek.length();
-				tek.seek(0); // "skok" na początek pliku
-				while (poz < dlug_pliku)
-				{tekst += tek.readLine()+"\n";
-				 poz= tek.getFilePointer();	 
-				 }
-			 }
-			catch (IOException e) {
-					System.out.println("BŁĄD ODCZYTU Z PLIKU!");
-					System.exit(2);
-				} 
 			
-			long pozycja=0, dlugoscpliku=0;
-			// SWOBODNY ODCZYT Z PLIKU
-			try {
-				dlugoscpliku = raf.length();
-				raf.seek(0); // "skok" na początek pliku
-				while (pozycja < dlugoscpliku)
-				{wulgaryzm = raf.readLine();
-				 pozycja= raf.getFilePointer();
-				 int j =0;
-				while((j=(tekst.indexOf(wulgaryzm,j)+1))>0){
-				System.out.println(wulgaryzm);
-				licznik_wulgaryzmow++;}
 		
-				 }
-			 } 
-				 catch (IOException e2) {
-					System.out.println("BŁĄD ODCZYTU Z PLIKU!");
-					System.exit(3);
-				} 
-			}	
+		StringBuilder tekst_odczyt=new StringBuilder("");
+		
+        try
+        {
+            BufferedReader tek=new BufferedReader (new FileReader(file));
+
+			
+            while (tek.ready())
+            {
+                tekst_odczyt.append(tek.readLine()+"\n");
+            }
+            String tekst1=new String(tekst_odczyt);
+            tekst += tekst1;
+            tek.close();
+		}
+                     catch (IOException e1) {
+                            System.out.println("Błąd przy odczycie pliku txt!");
+                            System.exit(2);
+                                }
+           
+         try
+        {
+			BufferedReader wulg=new BufferedReader (new FileReader("wulgaryzmy.txt"));
+            
+            while (wulg.ready())
+            {
+				StringBuilder wulg_odczyt=new StringBuilder("");
+               wulg_odczyt.append(wulg.readLine());
+               String wulgaryzm1=new String(wulg_odczyt);
+                int j =0;
+                if((j=(tekst.indexOf(wulgaryzm1,j)+1))>0){
+					System.out.println(wulgaryzm1);
+					licznik_wulgaryzmow++;}
+            }
+            wulg.close();
+		}
+		catch (IOException e2) {
+                            System.out.println("Błąd przy odczycie pliku wulgaryzmów!");
+                            System.exit(2);
+                                }
 			    //String tekst = new String(byte[] bytes, String charsetName)
+			}
 				ta.setText(tekst);
+				System.out.println("W pliku tekstowym wykryto "+licznik_wulgaryzmow+" wulgaryzmów");
+			
 			}
   }
   else if (s.equals("trybEdycji")){
@@ -212,6 +216,17 @@ public class wulgator extends JFrame
 					ta.setEditable(false);
 				}
   }
+    else if (s.equals("kolorystyka")){
+	Color c = JColorChooser.showDialog(wulgator.this,
+            "Choose a color...", getBackground());
+        if (c != null)
+          getContentPane().setBackground(Color.white);
+          String colorS = Integer.toString(c.getRGB());
+          System.out.println(colorS);
+          Color d = new Color(Integer.parseInt(colorS));
+          getContentPane().setBackground(d);
+          System.out.println(d);
+	}
   else if (s.equals("Wyjście")){
   txt=".: Ustawienia Programu :.\nKolorystyka:\n"+kolor_prog+"\nTryb Edycji:\n"+tryb_ed;
   FileWriter writer;
@@ -227,7 +242,7 @@ public class wulgator extends JFrame
     }
   System.exit(0);
   
-  }
+}
   }
 }
   public static void main(String argv[]) { 
