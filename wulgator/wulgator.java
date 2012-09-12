@@ -20,6 +20,7 @@ import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.swing.JColorChooser.*;
 
 
+
 public class wulgator extends JFrame 
 { 
   JTextArea ta = new JTextArea(30, 50);
@@ -80,7 +81,26 @@ public class wulgator extends JFrame
     JScrollPane scroll = new JScrollPane(ta);
 	getContentPane().add(scroll);
 	ta.setForeground(Color.darkGray);
-
+	
+	JPanel panel = new JPanel( new FlowLayout(FlowLayout.LEFT) );
+    panel.setPreferredSize(new Dimension(575, 100));
+    panel.setOpaque(false);
+    getContentPane().add(panel);
+    
+    JProgressBar progress = new JProgressBar();
+    progress.setPreferredSize(new Dimension(200, 70));
+    panel.add(progress);
+    
+    /*
+	JLabel arg2 = new JLabel();
+	arg2.setOpaque(true);
+	arg2.setBackground(Color.white);
+	arg2.setPreferredSize(new Dimension(400,60));
+	arg2.setHorizontalAlignment(SwingConstants.LEFT);
+	*/
+	
+	//panel.add(arg2);
+    
 			  StringBuilder text=new StringBuilder("");
         try
         {
@@ -108,28 +128,14 @@ public class wulgator extends JFrame
     Color t = new Color(Integer.parseInt(kolor_prog));
 	e = Integer.parseInt(tryb_ed);
 	getContentPane().setBackground(t);
-	/**
-	if (t==1){getContentPane().setBackground(Color.white);}
-	else if (t==2){getContentPane().setBackground(Color.lightGray);}
-	else if (t==3){getContentPane().setBackground(Color.gray);}
-	else if (t==4){getContentPane().setBackground(Color.darkGray);}
-	else if (t==5){getContentPane().setBackground(Color.black);}
-	else if (t==6){getContentPane().setBackground(Color.red);}
-	else if (t==7){getContentPane().setBackground(Color.pink);}
-	else if (t==8){getContentPane().setBackground(Color.orange);}
-	else if (t==9){getContentPane().setBackground(Color.yellow);}
-	else if (t==10){getContentPane().setBackground(Color.green);}
-	else if (t==11){getContentPane().setBackground(Color.magenta);}
-	else if (t==12){getContentPane().setBackground(Color.cyan);}
-	else if (t==13){getContentPane().setBackground(Color.blue);}
-	**/
+
 	if (e==0){ta.setEditable(false);}
 	else if (e==1){
 	     ta.setEditable(true);
 	     checkAction1.setSelected(true);
 	}
-	
-    setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+	//setUndecorated(true);
+    setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
     setResizable(false);
     setLocation(300,20);
     setSize(580, 630);
